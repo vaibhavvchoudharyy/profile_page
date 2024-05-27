@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cmd</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Consolas, "Courier New", Courier, monospace;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding-top: 0px;
+            margin: 0px auto;
+            padding: 10px;
+            background-color: #000000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        h1, p {
+            margin: 0;
+        }
+        .prompt {
+            color: #00FF00;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .input {
+            display: inline-block;
+            color: #00FF00;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 0.15em solid #00FF00; /* Cursor effect */
+            animation: typing 4s steps(68, end), blink-caret 0.75s step-end infinite;
+            vertical-align: top;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 45em; } /* Adjust width to fit the full text */
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00FF00; }
+        }
+        .input.done {
+            border-right: none; /* Hide cursor */
+        }
+        #second .input {
+            animation: typing2 2.2s steps(28, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing2 {
+            from { width: 0; }
+            to { width: 20em; } /* Adjust width to fit the full text */
+        }
+        #third {
+            display: none;
+            margin-top: 0px; /* Remove extra margin */
+        }
+        #third .input {
+            animation: none;
+            border-right: none;
+        }
+        #third .input p {
+            margin: 0; /* Remove margin between points */
+        }
+        #fourth {
+            display: none;
+            margin-top: 0px;
+        }
+        .hidden {
+            display: none;
+        }
+        input[type="text"] {
+            background-color: #000000;
+            color: #00FF00;
+            font-family: Consolas, "Courier New", Courier, monospace;
+            border: none;
+            outline: none;
+            animation: blink-caret 0.75s step-end infinite;
+            display: inline;
+            vertical-align: top;
+            width: 30px; /* Add width to make input visible */
+        }
+        .section {
+            width: 100%;
+            height: 10vh;
+            display: none; /* Hide by default */
+            color: #00FF00  ;
+            padding: 0px;
+            box-sizing: border-box;
+            background-color: #000000;
+        }
+        #profile { background-color: #000000; }
+        #education { background-color: #000000; }
+        #history { background-color: #000000; }
+        #work-experience { background-color: #000000; }
+        #research-paper { background-color: #000000; }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="prompt" id="first">PS C:\Users\[vaibhavchoudhary]&gt; <span class="input">#Welcome, My name is Vaibhav Choudhary and this is a lazy profile project of mine.</span></div>
+        <div id="second" style="display: none;" class="prompt">PS C:\Users\[vaibhavchoudhary]&gt; <span class="input">#Type in the number you want to select</span></div>
+        <div id="third" style="display: none;" class="prompt">
+            <span class="input done">
+                <p>1. Profile</p>
+                <p>2. Education</p>
+                <p>3. History</p>
+                <p>4. Work Experience</p>
+                <p>5. Contact info</p>
+            </span>
+        </div>
+        <div id="fourth" style="display: none;" class="prompt">
+            PS C:\Users\[vaibhavchoudhary]&gt; <input type="text" id="userInput" autofocus>
+        </div>
+        <div id="content">
+            <div id="profile" class="section">
+                <h1>Profile</h1>
+                <p>This is the profile section.</p>
+            </div>
+            <div id="education" class="section">
+                <h1>Education</h1>
+                <p>This is the education section.</p>
+            </div>
+            <div id="history" class="section">
+                <h1>History</h1>
+                <p>This is the history section.</p>
+            </div>
+            <div id="work-experience" class="section">
+                <h1>Work Experience</h1>
+                <p>This is the work experience section.</p>
+            </div>
+            <div id="Contact-info" class="section">
+                <h1>Contact Info</h1>
+                <p>Gmail-<a href="vaibhavchoudharyy@gmail.com" target="_blank" class="prompt">vaibhavchoudharyy@gmail.com</a></p>
+                <p>Linkedin-<a href="https://www.linkedin.com/in/vaibhav-choudhary-641139238/" target="_blank" class="prompt">https://www.linkedin.com/in/vaibhav-choudhary-641139238/</a></p>
+                <p>Github-<a href="https://github.com/vaibhavvchoudharyy" target="_blank" class="prompt">https://github.com/vaibhavvchoudharyy</a></p>
+                <p>X-<a href="https://x.com/carv0b" target="_blank" class="prompt">https://x.com/carv0b</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.querySelector('#first .input').classList.add('done');
+                document.querySelector('#second').style.display = 'block';
+                setTimeout(function() {
+                    document.querySelector('#second .input').classList.add('done');
+                    document.querySelector('#third').style.display = 'block';
+                    setTimeout(function() {
+                        document.querySelector('#fourth').style.display = 'block';
+                        document.getElementById('userInput').focus();
+                    }, 500);
+                }, 2250);
+            }, 4050); // Adjust to match the first animation duration
+        });
+
+        document.getElementById('userInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                var input = event.target.value.trim();
+                var sections = document.querySelectorAll('.section');
+                sections.forEach(function(section) {
+                    section.style.display = 'none';
+                });
+                var selectedSection = null;
+                switch (input) {
+                    case '1':
+                        selectedSection = document.getElementById('profile');
+                        break;
+                    case '2':
+                        selectedSection = document.getElementById('education');
+                        break;
+                    case '3':
+                        selectedSection = document.getElementById('history');
+                        break;
+                    case '4':
+                        selectedSection = document.getElementById('work-experience');
+                        break;
+                    case '5':
+                        selectedSection = document.getElementById('Contact-info');
+                        break;
+                    default:
+                        alert('Invalid input. Please enter a number between 1 and 5.');
+                }
+                if (selectedSection) {
+                    selectedSection.style.display = 'block';
+                }
+               
+                event.target.value = ''; // Clear the input field
+            }
+        });
+    </script>
+</body>
+</html>
